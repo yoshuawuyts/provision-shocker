@@ -1,0 +1,51 @@
+#!/bin/sh
+
+usage () {
+cat << USAGE
+  Usage: provision-shocker <command>
+
+  Commands:
+    provision   provision and install shocker
+    btrfs       mount a btrfs volume for images
+
+  Options:
+    -h, --help  output usage information
+
+  Examples:
+    $ provision-shocker provision         # provision shocker
+    $ provision-shocker btrfs --file=4G   # create a btrfs subvolume of 4G
+    $ provision-shocker btrfs /dev/xvda   # btrfs subvolume /dev/xvda
+USAGE
+}
+
+install_deps () {
+  # run nix
+  printf '[ installing dependencies ]\n'
+}
+
+mount_btrfs () {
+  # format xvdb into btrfs filesystem
+  sudo mkfs -t btrfs /dev/xvdf
+
+  # create btrfs mount node
+  sudo mkdir -p '/var/shocker'
+}
+
+provision_shocker () {
+  # download shocker
+  printf '[ installing shocker ]\n'
+  curl -L https://github.com/stamf/shocker/archive/master.tar.gz | tar xz
+
+  # mount cgroups
+  # sudo service cgconfig start
+
+  # print final message
+  printf 'run provision-shocker btrfs to configure btrfs\n'
+}
+
+[ $# = 0 ] && { usage; exit 1; }
+case "$1" in
+  -h|--help|help) usage; exit 0 ;;
+  provision) provision_shocker; exit ;;
+  btrfs) mount_btrfs; exit ;;
+esac
