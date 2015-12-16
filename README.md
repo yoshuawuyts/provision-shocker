@@ -32,6 +32,7 @@ your OS.
 - [Nix package manager][3]
 - [Alpine Package Keeper][4]
 - [nixos.org/manual][5]
+- [nix-packer][6]
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
@@ -42,3 +43,4 @@ your OS.
 [3]: https://nixos.org/nix/
 [4]: http://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
 [5]: http://nixos.org/nix/manual/
+[6]: https://github.com/TabDigital/nix-packer
